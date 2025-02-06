@@ -1,0 +1,12 @@
+ await sequelize.authenticate();
+    console.log('Connection to the development database has been established successfully.');
+
+  
+    await User.sync({ force: true }); 
+    console.log('The table for the User model was just (re)created!');
+
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Unable to connect to the development database:', error);
