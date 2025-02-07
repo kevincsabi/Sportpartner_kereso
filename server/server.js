@@ -1,9 +1,10 @@
 const express = require('express');
 const { Sequelize } = require('sequelize');
-const dbConfig = require('./config.js');
+const dbConfig = require('./config/config.js');
 const User = require('./model/user');
-const userRoutes = require('./userroute.js');
+const userRoutes = require('./routes/userroute.js');
 const bodyParser = require('body-parser');
+const helyszin = require('./model/helyszin.js');
 const app = express();
 const port = 3000;
 
@@ -17,6 +18,7 @@ sequelize.authenticate()
     
     // Sync the User model (force: true will drop and recreate the table)
     await User.sync({ force: true });
+    await helyszin.sync({force: true});
     console.log('The table for the User model was just (re)created!');
     
     // Middleware and routing
